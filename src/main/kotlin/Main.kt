@@ -13,6 +13,7 @@ import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import java.awt.event.KeyEvent
 
 @Composable
 @Preview
@@ -28,10 +29,10 @@ fun App() {
                 onValueChange = { text = it },
                 modifier = Modifier.focusRequester(focusRequester)
                     .onKeyEvent { event ->
-                        message = if (event.key == Key.NumPadDot) {
-                            "Key was numpad ."
-                        } else {
-                            "key was not numpad ."
+                        message = when (event.key) {
+                            Key.NumPadDot -> "expected behavior"
+                            Key(KeyEvent.VK_DECIMAL, KeyEvent.KEY_LOCATION_NUMPAD) -> "matched VK_DECIMAL"
+                            else -> "wrong key pressed"
                         }
                         false
                     }
