@@ -37,7 +37,7 @@ fun App() {
                         false
                     }
             )
-            Text("press a key")
+            Text("press the numpad . key")
             Text(message)
         }
     }
